@@ -1,2 +1,1 @@
-* [En](/)
-* [中文](/zh-cn/)
+* [DDoS_LING Blog](https://ddos-ling.top/)
