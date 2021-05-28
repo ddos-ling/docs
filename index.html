@@ -16,12 +16,20 @@
       name: 'DDoS_LING Docs',
       loadSidebar: true,
       loadNavbar: true,
+      mergeNavbar: true,
       alias: {
       '/.*/_sidebar.md': '/_sidebar.md'
-      }
+      },
+      search: {
+        paths: 'auto',
+        placeholder: '请输入要搜索的关键字',
+        noData: '没有结果',
+        depth: 6,
+      },
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
