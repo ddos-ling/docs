@@ -1,5 +1,8 @@
 # 问卷星题库集结
 
+!> **请听从在场老师或管理员的指令做题**  
+不要随便做题！
+
 ## 物理
 ### 每周题库
 > 第2周 <https://ks.wjx.top/vj/ORrN7AS.aspx>  
@@ -12,6 +15,14 @@
 > 知识点1\~3合并 <https://ks.wjx.top/vj/h4YrJMo.aspx>  
 > 知识点4\~6合并 <https://ks.wjx.top/vj/Oodu3u6.aspx>  
 > 知识点7\~8合并 <https://ks.wjx.top/vj/wzazKOK.aspx>  
+### 中考题库
+> 2017年 <https://ks.wjx.top/vj/tlmrb3Z.aspx>  
+> 2018年 <https://ks.wjx.top/vj/huW92Yr.aspx>  
+> 2019年 <https://ks.wjx.top/vj/e3w3s5I.aspx>  
+> 2020年 <https://ks.wjx.top/vj/mJ64Dcn.aspx>  
+> 17到20年汇总 <https://ks.wjx.top/vj/O4ua9nh.aspx>  
+### 名校题库
+> 三所名校的选择填空题 <https://ks.wjx.top/vj/PMQ7jN3.aspx>  
 
 ## 历史
 ### 基础题库
