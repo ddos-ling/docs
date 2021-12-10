@@ -186,7 +186,7 @@ METADATA_SECRET=000000
 INTERFACE_IP=172.16.1.101
 
 ##External Network Interface. example:eth1
-INTERFACE_NAME=ens192
+INTERFACE_NAME=ens224
 
 ##External Network The Physical Adapter. example:provider
 Physical_NAME=provider
