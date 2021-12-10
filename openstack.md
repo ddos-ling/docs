@@ -77,6 +77,11 @@ mount: /dev/loop0 is write-protected, mounting read-only
 [root@openstack ~]# vi /etc/yum.repos.d/local.repo
 ```
 在新文件local.repo中加入以下内容
+> 参数说明  
+> name: yum源名称  
+> gpgcheck: 是否开启gpg验证  
+> enabled: 是否启用这个源  
+> baseurl: 本地源绝对路径  
 ```
 [centos]
 name = centos
@@ -90,11 +95,7 @@ gpgcheck = 0
 enabled = 1
 baseurl = file:///opt/openstack/iaas-repo
 ```
-> 参数说明
-> name: yum源名称
-> gpgcheck: 是否开启gpg验证
-> enabled: 是否启用这个源
-> baseurl: 本地源绝对路径
+
 刷新yum源缓存
 ```
 [root@openstack ~]# yum clean all
