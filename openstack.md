@@ -22,7 +22,8 @@ GATEWAY=172.16.1.254
 ```
 ### 1.2. 上传yum源
 通过SecureFXPortable把CentOS源和OpenStack源上传到服务器的/root目录
-![logo](openstack-img/1.2-1.png ':size=100')
+
+![img](openstack-img/1.2-1.png ':size=300')
 ### 1.3. 关闭防火墙、修改主机名
 #### 1）关闭防火墙
 ```
@@ -309,3 +310,35 @@ BARBICAN_PASS=000000
 [root@openstack ~]# reboot
 ```
 ## 3. 管理OpenStack
+### 3.1. 登陆OpenStack控制台
+#### 1）访问http://172.16.1.101/dashboard登陆后台
+![img](openstack-img/3.1-1.png ':size=1000')
+#### 2）输入信息：
+> Domain:xiandian  
+> Username:admin  
+> Password:000000  
+
+![img](openstack-img/3.1-2.png ':size=500')
+### 3.2. 修改安全组策略
+#### 1）依次打开：项目 -> 网络 -> 安全组，进入default安全组进行配置
+#### 2）删除全部规则：勾选全部规则并删除
+![img](openstack-img/3.2-1.png ':size=500')
+#### 3）添加规则如下规则：
+![img](openstack-img/3.2-2.png ':size=500')
+### 3.3. 创建实例类型
+#### 1）依次打开：管理员 -> 计算 -> 实例类型，创建实例类型
+#### 2）根据如图所示的信息创建实例类型
+![img](openstack-img/3.3-1.png ':size=800')
+### 3.4. 创建网络
+#### 1）依次打开：管理员 -> 网络 -> 网络，创建网络
+#### 2）根据如图所示的信息创建网络
+![img](openstack-img/3.4-1.png ':size=800')
+![img](openstack-img/3.4-2.png ':size=800')
+![img](openstack-img/3.4-3.png ':size=800')
+### 3.5. 创建实例
+#### 1）依次打开：项目 -> 计算 -> 实例，创建实例
+#### 2）根据如图所示的信息创建实例
+![img](openstack-img/3.5-1.png ':size=800')
+![img](openstack-img/3.5-2.png ':size=800')
+![img](openstack-img/3.5-3.png ':size=800')
+![img](openstack-img/3.5-4.png ':size=800')
