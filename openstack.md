@@ -3,7 +3,7 @@
 ### 1.1. 配置ip
 #### 1）添加2个网卡（外网、内网）
 #### 2）修改/etc/sysconfig/network-scripts/ifcfg-ens*（具体的网口）文件
-```
+```bash
 [root@localhost ~]# vi /etc/sysconfig/network-scripts/ifcfg-ens192
 ```
 修改以下配置（ip地址和网关根据实际情况进行填写）
@@ -17,7 +17,7 @@ GATEWAY=172.16.1.254
 ```
 **提醒：无需配置dns**
 #### 3）重启网卡
-```
+```bash
 [root@openstack ~]# systemctl restart network
 ```
 ### 1.2. 上传yum源
@@ -26,14 +26,14 @@ GATEWAY=172.16.1.254
 ![img](openstack-img/1.2-1.png ':size=300')
 ### 1.3. 关闭防火墙、修改主机名
 #### 1）关闭防火墙
-```
+```bash
 [root@localhost ~]# systemctl stop firewalld
 [root@localhost ~]# systemctl disable firewalld
 Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
 Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 ```
 #### 2）关闭selinux
-```
+```bash
 [root@localhost ~]# setenforce 0
 [root@localhost ~]# vi /etc/selinux/config
 # ......
@@ -42,12 +42,12 @@ SELINUX=permissive
 SELINUXTYPE=targeted
 ```
 #### 3）更改主机名
-```
+```bash
 [root@localhost ~]# hostnamectl set-hostname openstack
 [root@localhost ~]# logout
 ```
 重新登录后配置hosts
-```
+```bash
 [root@openstack ~]# vi /etc/hosts
 ```
 在文件末尾增加以下内容（ip根据实际情况更改）
@@ -56,12 +56,12 @@ SELINUXTYPE=targeted
 ```
 ### 1.4. 配置本地yum源
 #### 1）新建本地yum源文件夹
-```
+```bash
 [root@openstack ~]# cd /opt/
 [root@openstack opt]# mkdir centos openstack
 ```
 #### 2）挂载iso镜像并拷贝到本地
-```
+```bash
 [root@openstack opt]# mount /root/CentOS-7-x86_64-DVD-1804.iso /mnt/   #挂载镜像
 mount: /dev/loop0 is write-protected, mounting read-only
 [root@openstack opt]# cp -rp /mnt/* centos/   #复制镜像的内容到本地
@@ -73,7 +73,7 @@ mount: /dev/loop0 is write-protected, mounting read-only
 [root@openstack opt]# umount /mnt/
 ```
 #### 3）配置yum源
-```
+```bash
 [root@openstack ~]# mv /etc/yum.repos.d/* /mnt/
 [root@openstack ~]# vi /etc/yum.repos.d/local.repo
 ```
@@ -98,17 +98,17 @@ baseurl = file:///opt/openstack/iaas-repo
 ```
 
 刷新yum源缓存
-```
+```bash
 [root@openstack ~]# yum clean all
 [root@openstack ~]# yum makecache 
 ```
 ### 1.5. 配置OpenStack相关ip、账号、密码
 安装OpenStack一键安装脚本
-```
+```bash
 [root@openstack ~]# yum install iaas-openstack -y
 ```
 配置OpenStack一键安装脚本
-```
+```bash
 [root@openstack ~]# cd /etc/iaas-openstack/
 [root@openstack iaas-openstack]# cp openrc.sh openrc.sh.bak   #备份脚本
 [root@openstack iaas-openstack]# sed -i /=/s/#//g openrc.sh   #去除脚本注释
@@ -261,52 +261,52 @@ BARBICAN_PASS=000000
 ```
 ## 2. 安装OpenStack
 ### 2.1. 环境配置
-```
+```bash
 [root@openstack ~]# iaas-pre-host.sh
 [root@openstack ~]# iaas-install-mysql.sh
 ```
 ### 2.2. 安装OpenStack组件
 #### 2.2.1. 安装Keystone 认证服务
-```
+```bash
 [root@openstack ~]# iaas-install-keystone.sh
 ```
 #### 2.2.2. 安装Glance 镜像服务
-```
+```bash
 [root@openstack ~]# iaas-install-glance.sh
 ```
 上传CentOS7.5镜像
-```
+```bash
 [root@openstack ~]# cd /opt/openstack/images/
 [root@openstack images]# source /etc/keystone/admin-openrc.sh 
 [root@openstack images]# openstack image create --file CentOS_7.5_x86_64_XD.qcow2 --container-format bare --disk-format qcow2 centos7.5
 [root@openstack images]# openstack image list
 ```
 #### 2.2.3. 安装Nova 计算资源管理
-```
+```bash
 [root@openstack ~]# iaas-install-nova-controller.sh
 [root@openstack ~]# iaas-install-nova-compute.sh
 ```
 #### 2.2.4. 安装Neutron 网络
-```
+```bash
 [root@openstack ~]# iaas-install-neutron-controller.sh
 [root@openstack ~]# iaas-install-neutron-compute.sh
 ```
 #### 2.2.5. 安装Dashboard Web控制台
-```
+```bash
 [root@openstack ~]# iaas-install-dashboard.sh
 ```
 #### 2.2.6. 安装Cinder 存储
-```
+```bash
 [root@openstack ~]# iaas-install-cinder-controller.sh
 [root@openstack ~]# iaas-install-cinder-compute.sh
 ```
 #### 2.2.7. 安装Swift 对象存储
-```
+```bash
 [root@openstack ~]# iaas-install-swift-controller.sh
 [root@openstack ~]# iaas-install-swift-compute.sh
 ```
 ### 2.3. 重启服务器
-```
+```bash
 [root@openstack ~]# reboot
 ```
 ## 3. 管理OpenStack
