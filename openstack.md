@@ -83,7 +83,7 @@ mount: /dev/loop0 is write-protected, mounting read-only
 > gpgcheck: 是否开启gpg验证  
 > enabled: 是否启用这个源  
 > baseurl: 本地源绝对路径  
-```
+```ini
 [centos]
 name = centos
 gpgcheck = 0
