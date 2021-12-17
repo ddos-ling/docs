@@ -271,3 +271,98 @@ docker-init:
 Version: 0.19.0
 GitCommit: de40ad0
 ```
+## 5. DockerFile
+### FROM
+基础镜像的选择
+```docker
+FROM <镜像名>
+```
+例子：Build一个Nginx镜像
+```docker
+FROM nginx:1.21.0-alpine
+ADD index.html /usr/share/nginx/html/index.html
+```
+
+### RUN
+`RUN`主要用于在Image里执行指令，比如安装软件，下载文件等（在docker build时执行）
+```docker
+RUN <执行的命令>
+```
+例子：需要在docker中执行的如下命令
+```shell
+$ apt-get update
+$ apt-get install wget
+$ wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz
+$ tar zxf ipinfo_2.0.1_linux_amd64.tar.gz
+$ mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo
+$ rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
+```
+所对应的dockerfile为：
+```docker
+FROM ubuntu:21.04
+RUN apt-get update
+RUN apt-get install -y wget
+RUN wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz
+RUN tar zxf ipinfo_2.0.1_linux_amd64.tar.gz
+RUN mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo
+RUN rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
+```
+改进版DockerFile：
+```docker
+FROM ubuntu:21.04
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz && \
+    tar zxf ipinfo_2.0.1_linux_amd64.tar.gz && \
+    mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo && \
+    rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
+```
+
+### CMD
+`CMD`可以用来设置容器启动时默认会执行的命令（在docker run时执行）
+```docker
+RUN <执行的命令>
+```
+
+### ADD
+#### 1）复制普通文件
+把local的一个文件复制到镜像里，如果目标目录不存在，则会自动创建
+```docker
+ADD <docker外位置> <docker内位置>
+```
+例子：将index.html增加到nginx
+index.html:
+```html
+<h1>Hello Docker</h1>
+```
+DockerFile：
+```docker
+FROM nginx:1.21.0-alpine
+ADD index.html /usr/share/nginx/html/index.html
+```
+#### 2）复制压缩文件
+`ADD`比`COPY`高级一点的地方就是，如果复制的是一个gzip等压缩文件时，ADD会帮助我们自动去解压缩文件。
+```docker
+ADD <docker外的压缩文件位置> <docker内解压位置>
+```
+例子：解压hello.tar.gz到/app/
+```docker
+FROM python:3.9.5-alpine3.13
+ADD hello.tar.gz /app/
+```
+
+### COPY
+把local的一个文件复制到镜像里，如果目标目录不存在，则会自动创建
+```docker
+COPY <docker外位置> <docker内位置>
+```
+例子：将index.html增加到nginx
+index.html:
+```html
+<h1>Hello Docker</h1>
+```
+DockerFile：
+```docker
+FROM nginx:1.21.0-alpine
+COPY index.html /usr/share/nginx/html/index.html
+```
